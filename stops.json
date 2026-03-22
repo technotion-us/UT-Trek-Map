@@ -1,0 +1,24 @@
+{
+    "stops": [
+        {
+            "title": "San Fransisco Bay Ferry",
+            "people": "Seamus Murphy, Executive Director; Terence Candell Jr, Government Affairs Specialist",
+            "takeaways": "Insights on the impact of regional transportation and how different urban systems interact.",
+            "coords": [-122.391340, 37.794690],
+            "images": [
+                "https://media.discordapp.net/attachments/341455496705998850/1485341160682688614/fit_5120.png?ex=69c18341&is=69c031c1&hm=237e31faf1842c5be64f3e2908d8626bde5a9d48454ca51d07ca350ac5ffd8e3&=&format=webp&quality=lossless&width=2441&height=1769",
+                "https://media.discordapp.net/attachments/341455496705998850/1485341162037448824/fit_4096.png?ex=69c18341&is=69c031c1&hm=3c0c3414598bd939f061d51bea98973f5b015840b26638ddd9ce0a188de8b888&=&format=webp&quality=lossless&width=2370&height=1769"
+            ]
+        },
+        {
+            "title": "IDEO",
+            "people": "Name, Position",
+            "takeaways": "Insights on the process of industrial design and human centered design",
+            "coords": [-122.411876, 37.765211],
+            "images": [
+                "https://media.discordapp.net/attachments/341455496705998850/1485341160682688614/fit_5120.png?ex=69c18341&is=69c031c1&hm=237e31faf1842c5be64f3e2908d8626bde5a9d48454ca51d07ca350ac5ffd8e3&=&format=webp&quality=lossless&width=2441&height=1769",
+                "https://media.discordapp.net/attachments/341455496705998850/1485341162037448824/fit_4096.png?ex=69c18341&is=69c031c1&hm=3c0c3414598bd939f061d51bea98973f5b015840b26638ddd9ce0a188de8b888&=&format=webp&quality=lossless&width=2370&height=1769"
+            ]
+        }
+    ]
+}
