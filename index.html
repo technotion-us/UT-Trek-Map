@@ -73,6 +73,44 @@ button {
     font-size: 12px;
     border-radius: 4px;
 }
+
+.trek-marker {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #4ade80;
+    cursor: pointer;
+    position: relative;
+}
+
+.trek-marker::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(74, 222, 128, 0.55);
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.trek-marker.is-active::after {
+    animation: markerPulse 1.7s ease-out infinite;
+}
+
+@keyframes markerPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+    }
+}
 </style>
 
 </head>
@@ -136,14 +174,12 @@ function createCarousel(images = []) {
 }
 
 function addLocationsToMap(locations) {
+let activeMarkerEl = null;
+
 locations.forEach(loc => {
 
     const el = document.createElement('div');
-    el.style.width = "14px";
-    el.style.height = "14px";
-    el.style.borderRadius = "50%";
-    el.style.background = "#4ade80";
-    el.style.cursor = "pointer";
+    el.className = 'trek-marker';
 
     const popupHTML = `
         <div class="popup-title">${loc.title}</div>
@@ -154,6 +190,22 @@ locations.forEach(loc => {
 
     const popup = new mapboxgl.Popup({ offset: 25 })
         .setHTML(popupHTML);
+
+    popup.on('open', () => {
+        if (activeMarkerEl && activeMarkerEl !== el) {
+            activeMarkerEl.classList.remove('is-active');
+        }
+
+        el.classList.add('is-active');
+        activeMarkerEl = el;
+    });
+
+    popup.on('close', () => {
+        el.classList.remove('is-active');
+        if (activeMarkerEl === el) {
+            activeMarkerEl = null;
+        }
+    });
 
     const marker = new mapboxgl.Marker(el)
         .setLngLat(loc.coords)
