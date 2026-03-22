@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SF Trek Travel Atlas</title>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
+.mapboxgl-popup {
+    max-width: 320px;
+    font-family: system-ui;
+}
+
+.popup-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.popup-people {
+    font-style: italic;
+    margin-bottom: 6px;
+}
+
+.popup-takeaways {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.carousel img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: none;
+}
+
+.carousel img.active {
+    display: block;
+}
+
+.carousel-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+button {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tooltip {
+    background: black;
+    color: white;
+    padding: 4px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+<script src="config.js"></script>
+<script>
+
+mapboxgl.accessToken = CONFIG.MAPBOX_TOKEN;
+
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v11',
+    center: [-122.4194, 37.7749],
+    zoom: 11
+});
+
+const locations = [
+{
+    title: "San Fransisco Bay Ferry",
+    people: "Seamus Murphy, Executive Director; Terence Candell Jr, Government Affairs Specialist",
+    takeaways: "Insights on the impact of regional transportation and how different urban systems interact.",
+    coords: [-122.391340, 37.794690],
+    images: [
+        "https://media.discordapp.net/attachments/341455496705998850/1485341160682688614/fit_5120.png?ex=69c18341&is=69c031c1&hm=237e31faf1842c5be64f3e2908d8626bde5a9d48454ca51d07ca350ac5ffd8e3&=&format=webp&quality=lossless&width=2441&height=1769",
+        "https://media.discordapp.net/attachments/341455496705998850/1485341162037448824/fit_4096.png?ex=69c18341&is=69c031c1&hm=3c0c3414598bd939f061d51bea98973f5b015840b26638ddd9ce0a188de8b888&=&format=webp&quality=lossless&width=2370&height=1769"
+    ]
+},
+{
+    title: "Transit Innovation Lab",
+    people: "Carlos Rodriguez, Urban Mobility Researcher",
+    takeaways: "Data-driven approaches to improving public transit reliability.",
+    coords: [-122.418, 37.776],
+    images: [
+        "https://media.discordapp.net/attachments/341455496705998850/1485341160682688614/fit_5120.png?ex=69c18341&is=69c031c1&hm=237e31faf1842c5be64f3e2908d8626bde5a9d48454ca51d07ca350ac5ffd8e3&=&format=webp&quality=lossless&width=2441&height=1769",
+        "https://media.discordapp.net/attachments/341455496705998850/1485341162037448824/fit_4096.png?ex=69c18341&is=69c031c1&hm=3c0c3414598bd939f061d51bea98973f5b015840b26638ddd9ce0a188de8b888&=&format=webp&quality=lossless&width=2370&height=1769"
+    ]
+}
+];
+
+function createCarousel(images) {
+
+    let imgHTML = images.map((img, i) =>
+        `<img src="${img}" class="${i===0?'active':''}">`
+    ).join("");
+
+    return `
+        <div class="carousel">
+            ${imgHTML}
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="prevImage(this)">◀</button>
+            <button onclick="nextImage(this)">▶</button>
+        </div>
+    `;
+}
+
+locations.forEach(loc => {
+
+    const el = document.createElement('div');
+    el.style.width = "14px";
+    el.style.height = "14px";
+    el.style.borderRadius = "50%";
+    el.style.background = "#4ade80";
+    el.style.cursor = "pointer";
+
+    const popupHTML = `
+        <div class="popup-title">${loc.title}</div>
+        <div class="popup-people">${loc.people}</div>
+        <div class="popup-takeaways">${loc.takeaways}</div>
+        ${createCarousel(loc.images)}
+    `;
+
+    const popup = new mapboxgl.Popup({ offset: 25 })
+        .setHTML(popupHTML);
+
+    const marker = new mapboxgl.Marker(el)
+        .setLngLat(loc.coords)
+        .setPopup(popup)
+        .addTo(map);
+
+    const tooltip = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 15
+    }).setText(loc.title);
+
+    el.addEventListener('mouseenter', () => {
+        tooltip.setLngLat(loc.coords).addTo(map);
+    });
+
+    el.addEventListener('mouseleave', () => {
+        tooltip.remove();
+    });
+
+});
+
+function nextImage(btn) {
+    const imgs = btn.parentElement.previousElementSibling.querySelectorAll("img");
+    let activeIndex = [...imgs].findIndex(i => i.classList.contains("active"));
+
+    imgs[activeIndex].classList.remove("active");
+    imgs[(activeIndex + 1) % imgs.length].classList.add("active");
+}
+
+function prevImage(btn) {
+    const imgs = btn.parentElement.previousElementSibling.querySelectorAll("img");
+    let activeIndex = [...imgs].findIndex(i => i.classList.contains("active"));
+
+    imgs[activeIndex].classList.remove("active");
+    imgs[(activeIndex - 1 + imgs.length) % imgs.length].classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
