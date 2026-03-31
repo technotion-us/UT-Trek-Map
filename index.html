@@ -173,6 +173,12 @@ function createCarousel(images = []) {
     `;
 }
 
+function stripHtml(value = '') {
+    const temp = document.createElement('div');
+    temp.innerHTML = value;
+    return temp.textContent || temp.innerText || '';
+}
+
 const STOPS_SOURCE_ID = 'trek-stops';
 const STOPS_LAYER_ID = 'trek-stops-layer';
 
@@ -239,7 +245,7 @@ function addLocationsToMap(locations) {
 
         hoverPopup
             .setLngLat(feature.geometry.coordinates)
-            .setText(feature.properties.title || '')
+            .setText(stripHtml(feature.properties.title || ''))
             .addTo(map);
     });
 
