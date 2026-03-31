@@ -131,9 +131,9 @@ const map = new mapboxgl.Map({
 });
 
 async function loadLocations() {
-    const response = await fetch('stops.json');
+    const response = await fetch('testing.json');
     if (!response.ok) {
-        throw new Error(`Failed to load stops.json: ${response.status}`);
+        throw new Error(`Failed to load stops json: ${response.status}`);
     }
 
     const data = await response.json();

@@ -1,0 +1,266 @@
+{
+    "stops": [
+        {
+            "title": "[Waymo](https://waymo.com/)",
+            "people": "[Gabe Nelson](https://www.linkedin.com/in/gabenelson/)",
+            "field": "Autonomous Vehicles / Urban Mobility",
+            "sector": "Private",
+            "summary": "Mobility platform using crowdsourced data, mapping, and logistics algorithms to move people",
+            "takeaways": "- Find the one thing that you\u2019re really into and go crazy, go deep - Bring your interests together, be a translator at your nexus \u201cBeing a translator at the point of your nexus\u201d",
+            "coordinates": [
+                -122.0440675,
+                37.39958261
+            ],
+            "images": [
+                "jack01",
+                "bri01"
+            ]
+        },
+        {
+            "title": "UT Alumn",
+            "people": "[Ting Fong Chen](https://www.linkedin.com/in/ting-fong-chen-37782b219/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.3898694,
+                37.7944681
+            ],
+            "images": []
+        },
+        {
+            "title": "UT Alumn",
+            "people": "[Jenna Li](https://www.linkedin.com/in/jenna-li-6b2a54212/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.4046256,
+                37.79473649
+            ],
+            "images": []
+        },
+        {
+            "title": "UT Alumn",
+            "people": "[Odiso Obiora](https://www.linkedin.com/in/odiso-obiora/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.4046256,
+                37.79473649
+            ],
+            "images": []
+        },
+        {
+            "title": "UT Alumn",
+            "people": "[Audrey Tang](https://www.linkedin.com/in/audreystang/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.4046256,
+                37.79473649
+            ],
+            "images": []
+        },
+        {
+            "title": "[Gensler](https://www.gensler.com/offices/san-francisco)",
+            "people": "[Randy Howder](https://www.linkedin.com/in/howder/)",
+            "field": "Architecture / Built Environment Design",
+            "sector": "Private",
+            "summary": "Global architecture, design, and planning firm",
+            "takeaways": "- Intentional design shapes behavior and outcomes - Physical space is a strategic tool - Strong team-based workflow - Integrates sustainability but through frameworks like LEED - Heavy internal research + client data \u201cIntentional design generates results\u201d, \u201cNo one does it alone\u201d",
+            "coordinates": [
+                -122.4023349,
+                37.79148085
+            ],
+            "images": [
+                "bryan01",
+                "bryan02",
+                "bri02",
+                "bri03"
+            ]
+        },
+        {
+            "title": "[Gehl](https://www.gehlpeople.com/)",
+            "people": "[Blaine Merker](https://www.linkedin.com/in/blainemerker/); [A. Ghigo DiTommaso](https://www.linkedin.com/in/a-ghigo-ditommaso-4a027944/)",
+            "field": "Urban Design / Human-Centered Planning",
+            "sector": "Private",
+            "summary": "Urban design + research firm focused on human-centered cities, public life studies, and behavior-driven planning",
+            "takeaways": "- While the built environment operates in silos, it is not experienced as silos - Cities must be designed at the human scale - Ethnographic research is powerful but hard to sell - Storytelling + data visualization drive decisions - Focus on lived experience, not just metrics; the data does not need to be novelty - Iteration + user feedback is critical - Everyone has data, what matters is the narrative you use to tell the story \u201cHuman beings are the most sophisticated sensor\u201d, \u201cThe most sustainable building is one that is already built\u201d",
+            "coordinates": [
+                -122.4083459,
+                37.78676758
+            ],
+            "images": [
+                "jack02",
+                "bryan03",
+                "bryan04"
+            ]
+        },
+        {
+            "title": "[IDEO](https://www.ideo.com/)",
+            "people": "[Mariah Welch](https://www.linkedin.com/in/mariah-welch-6a035a53/)",
+            "field": "Product Design / UX",
+            "sector": "Private",
+            "summary": "Global design consultancy focusing on product, service, and experience design using human-centered design methods",
+            "takeaways": "- Strong client-driven work limits agency - Must clearly define \u201cwho you are designing for\u201d - Balancing accessibility vs targeted design is key - Emphasis on desirability, feasibility, viability (+ responsibility) \u201cWho are the humans we are designing for?\u201d, \"Have an open mind for opportunities to learn, you\u2019ll learn when you need to but putting yourself in that position is up to you\", \"If you want to chance the industry, you have to know it\"",
+            "coordinates": [
+                -122.4114416,
+                37.7657325
+            ],
+            "images": [
+                "bryan05",
+                "bryan06",
+                "bryan07"
+            ]
+        },
+        {
+            "title": "[City of San Francisco](https://www.sf.gov/departments--city-administrator--digital-services)",
+            "people": "[Cyd Harrell](https://www.linkedin.com/in/cydharrell/)",
+            "field": "Civic Tech",
+            "sector": "Public",
+            "summary": "Civic tech and government focused on improving public services",
+            "takeaways": "- Civic tech constrained by hiring + procurement - Deep user research (even informal) is critical - Trust-building enables insight - Get to know the people that are experiencing the problems you are trying to solve Go get tacos",
+            "coordinates": [
+                -122.4186302,
+                37.77944457
+            ],
+            "images": [
+                "bryan08",
+                "bryan09",
+                "bryan10",
+                "bryan11"
+            ]
+        },
+        {
+            "title": "TCAUP Alumn",
+            "people": "[Madeeha Ayub](https://www.linkedin.com/in/madeeha-ayub-63742b71/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.400587,
+                37.78727344
+            ],
+            "images": [
+                "bryan17"
+            ]
+        },
+        {
+            "title": "TCAUP Alumn",
+            "people": "[Robert Yuen](https://www.linkedin.com/in/yuenrobert/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.40083,
+                37.79033271
+            ],
+            "images": [
+                "bryan17"
+            ]
+        },
+        {
+            "title": "TCAUP Alumn",
+            "people": "[Peter Winch](https://www.linkedin.com/in/peterwinch/)",
+            "field": "",
+            "sector": "",
+            "summary": "",
+            "takeaways": "",
+            "coordinates": [
+                -122.399344,
+                37.78762272
+            ],
+            "images": [
+                "bryan17"
+            ]
+        },
+        {
+            "title": "[Good Neighbor Lab](https://www.goodneighborlab.org/)",
+            "people": "[Julia Gitis](https://www.linkedin.com/in/juliagoolia/)",
+            "field": "Civic Tech / Community Engagement",
+            "sector": "Non-Profit",
+            "summary": "Community-focused initiative using tech + engagement to strengthen neighborhoods",
+            "takeaways": "- Lead with joy and human connection - Community tech works better outside government in low-trust contexts - Breadth vs depth is a strategic choice - Bring in partners to add depth - Feedback should shape community innovation Interdisciplinary work builds on itself, diving into your interests will help your other interests get stronger",
+            "coordinates": [
+                -122.4018414,
+                37.79147237
+            ],
+            "images": [
+                "charlie01",
+                "bryan12"
+            ]
+        },
+        {
+            "title": "[SF Bay Ferry](https://sanfranciscobayferry.com/)",
+            "people": "[Seamus Murphy](https://www.linkedin.com/in/seamus-murphy-75a665/); [Terence Candell Jr.](https://www.linkedin.com/in/terence-candell-jr-0b358287/)",
+            "field": "Transportation",
+            "sector": "Public",
+            "summary": "Regional ferry transit system investing in electrification and sustainable mobility",
+            "takeaways": "- Infrastructure projects require massive coordination - Sustainability requires systems-level thinking - Service design must match evolving users - Sustainable development in infrastructure is rarely about an individual system doing everything right \u201cIt\u2019s all interconnected\u201d",
+            "coordinates": [
+                -122.3919879,
+                37.79466354
+            ],
+            "images": [
+                "bryan13",
+                "bryan14",
+                "jack05",
+                "bri05"
+            ]
+        },
+        {
+            "title": "[SPUR](https://www.spur.org/)",
+            "people": "[Nicole Neditch](https://www.linkedin.com/in/nneditch/)",
+            "field": "Urban Policy / Civic Tech",
+            "sector": "Non-Profit",
+            "summary": "Policy think tank focused on urban planning, governance, and civic systems in the Bay Area",
+            "takeaways": "- Civic tech blocked by procurement systems - Engagement is often the real problem, not apathy - Change must be local and trust-based \u201c'People don\u2019t care' is false \u2014 you\u2019re just not engaging them correctly\u201d",
+            "coordinates": [
+                -122.4010309,
+                37.78744183
+            ],
+            "images": [
+                "bri06"
+            ]
+        },
+        {
+            "title": "[CA Forever](https://californiaforever.com/)",
+            "people": "[Any\u00e9 Spivey](https://www.linkedin.com/in/any%C3%A9-spivey-78a7565/)",
+            "field": "Urban Development / Speculative Urbanism",
+            "sector": "Private",
+            "summary": "Private initiative to build a new city in California from scratch",
+            "takeaways": "- Biggest barrier is governance and permissions - Designing from scratch introduces new risks - Metrics like walkability + affordability guide vision The biggest challenge to building a city is permission",
+            "coordinates": [
+                -122.398815,
+                37.78890101
+            ],
+            "images": [
+                "bryan15"
+            ]
+        },
+        {
+            "title": "[SITELAB](https://www.sitelaburbanstudio.com/)",
+            "people": "[Laura Crescimano](https://www.linkedin.com/in/laura-crescimano-7353024/)",
+            "field": "Urban Strategy / Public Interest Design",
+            "sector": "Private",
+            "summary": "Urban design studio focusing on public-interest projects and process-driven design",
+            "takeaways": "- Process and narrative are as important as outcome, the work sells itself - Risk mitigation (climate, legal) must be embedded early - Values: Curious, humble, ambitious \u201cDon\u2019t wait for your business cards to start your business - Instead of thinking about the what first, the why and how dictates who should be included in the conversation and what the \u201cwhat\u201d is\u201d",
+            "coordinates": [
+                -122.400587,
+                37.78727344
+            ],
+            "images": [
+                "bryan16"
+            ]
+        }
+    ]
+}

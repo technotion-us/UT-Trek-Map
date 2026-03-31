@@ -1,0 +1,124 @@
+{
+    "stops": [
+        {
+            "title": "[Waymo](https://waymo.com/)",
+            "people": "[Gabe Nelson](https://www.linkedin.com/in/gabenelson/)",
+            "takeaways": "- Find the one thing that you're really into and go crazy, go deep - Bring your interests together, be a translator at your nexus\n\n\"Being a translator at the point of your nexus\"",
+            "coords": [-122.0440675, 37.39958261],
+            "images": ["jack01", "bri01"],
+            "field": "Autonomous Vehicles / Urban Mobility",
+            "sector": "Private",
+            "summary": "Mobility platform using crowdsourced data, mapping, and logistics algorithms to move people"
+        },
+        {
+            "title": "UT Alumni Dinner",
+            "people": "[Ting Fong Chen](https://www.linkedin.com/in/ting-fong-chen-37782b219/); [Jenna Li](https://www.linkedin.com/in/jenna-li-6b2a54212/); [Odiso Obiora](https://www.linkedin.com/in/odiso-obiora/); [Audrey Tang](https://www.linkedin.com/in/audreystang/)",
+            "takeaways": "",
+            "coords": [-122.3898694, 37.7944681],
+            "images": [],
+            "field": "",
+            "sector": "",
+            "summary": ""
+        },
+        {
+            "title": "[Gensler](https://www.gensler.com/offices/san-francisco)",
+            "people": "[Randy Howder](https://www.linkedin.com/in/howder/)",
+            "takeaways": "- Intentional design shapes behavior and outcomes - Physical space is a strategic tool - Strong team-based workflow - Integrates sustainability but through frameworks like LEED - Heavy internal research + client data\n\n\"Intentional design generates results\", \"No one does it alone\"",
+            "coords": [-122.4023349, 37.79148085],
+            "images": ["bryan01", "bryan02", "bri02", "bri03"],
+            "field": "Architecture / Built Environment Design",
+            "sector": "Private",
+            "summary": "Global architecture, design, and planning firm"
+        },
+        {
+            "title": "[Gehl](https://www.gehlpeople.com/)",
+            "people": "[Blaine Merker](https://www.linkedin.com/in/blainemerker/); [A. Ghigo DiTommaso](https://www.linkedin.com/in/a-ghigo-ditommaso-4a027944/)",
+            "takeaways": "- While the built environment operates in silos, it is not experienced as silos - Cities must be designed at the human scale - Ethnographic research is powerful but hard to sell - Storytelling + data visualization drive decisions - Focus on lived experience, not just metrics; the data does not need to be novelty - Iteration + user feedback is critical - Everyone has data, what matters is the narrative you use to tell the story\n\n\"Human beings are the most sophisticated sensor\", \"The most sustainable building is one that is already built\"",
+            "coords": [-122.4083459, 37.78676758],
+            "images": ["jack02", "bryan03", "bryan04"],
+            "field": "Urban Design / Human-Centered Planning",
+            "sector": "Private",
+            "summary": "Urban design + research firm focused on human-centered cities, public life studies, and behavior-driven planning"
+        },
+        {
+            "title": "[IDEO](https://www.ideo.com/)",
+            "people": "[Mariah Welch](https://www.linkedin.com/in/mariah-welch-6a035a53/)",
+            "takeaways": "- Strong client-driven work limits agency - Must clearly define \"who you are designing for\" - Balancing accessibility vs targeted design is key - Emphasis on desirability, feasibility, viability (+ responsibility)\n\n\"Who are the humans we are designing for?\", \"Have an open mind for opportunities to learn, you'll learn when you need to but putting yourself in that position is up to you\", \"If you want the chance to change the industry, you have to know it\"",
+            "coords": [-122.4114416, 37.7657325],
+            "images": ["bryan05", "bryan06", "bryan07"],
+            "field": "Product Design / UX",
+            "sector": "Private",
+            "summary": "Global design consultancy focusing on product, service, and experience design using human-centered design methods"
+        },
+        {
+            "title": "[City of San Francisco](https://www.sf.gov/departments--city-administrator--digital-services)",
+            "people": "[Cyd Harrell](https://www.linkedin.com/in/cydharrell/)",
+            "takeaways": "- Civic tech constrained by hiring + procurement - Deep user research (even informal) is critical - Trust-building enables insight - Get to know the people that are experiencing the problems you are trying to solve\n\nGo get tacos",
+            "coords": [-122.4186302, 37.77944457],
+            "images": ["bryan08", "bryan09", "bryan10", "bryan11"],
+            "field": "Civic Tech",
+            "sector": "Public",
+            "summary": "Civic tech and government focused on improving public services"
+        },
+        {
+            "title": "TCAUP Alumni Dinner",
+            "people": "[Madeeha Ayub](https://www.linkedin.com/in/madeeha-ayub-63742b71/); [Robert Yuen](https://www.linkedin.com/in/yuenrobert/); [Peter Winch](https://www.linkedin.com/in/peterwinch/)",
+            "takeaways": "",
+            "coords": [-122.400587, 37.78727344],
+            "images": ["bryan17"],
+            "field": "",
+            "sector": "",
+            "summary": ""
+        },
+        {
+            "title": "[Good Neighbor Lab](https://www.goodneighborlab.org/)",
+            "people": "[Julia Gitis](https://www.linkedin.com/in/juliagoolia/)",
+            "takeaways": "- Lead with joy and human connection - Community tech works better outside government in low-trust contexts - Breadth vs depth is a strategic choice - Bring in partners to add depth - Feedback should shape community innovation\n\nInterdisciplinary work builds on itself, diving into your interests will help your other interests get stronger",
+            "coords": [-122.4018414, 37.79147237],
+            "images": ["charlie01", "bryan12"],
+            "field": "Civic Tech / Community Engagement",
+            "sector": "Non-Profit",
+            "summary": "Community-focused initiative using tech + engagement to strengthen neighborhoods"
+        },
+        {
+            "title": "[SF Bay Ferry](https://sanfranciscobayferry.com/)",
+            "people": "[Seamus Murphy](https://www.linkedin.com/in/seamus-murphy-75a665/); [Terence Candell Jr.](https://www.linkedin.com/in/terence-candell-jr-0b358287/)",
+            "takeaways": "- Infrastructure projects require massive coordination - Sustainability requires systems-level thinking - Service design must match evolving users - Sustainable development in infrastructure is rarely about an individual system doing everything right\n\n\"It's all interconnected\"",
+            "coords": [-122.3919879, 37.79466354],
+            "images": ["bryan13", "bryan14", "jack05", "bri05"],
+            "field": "Transportation",
+            "sector": "Public",
+            "summary": "Regional ferry transit system investing in electrification and sustainable mobility"
+        },
+        {
+            "title": "[SPUR](https://www.spur.org/)",
+            "people": "[Nicole Neditch](https://www.linkedin.com/in/nneditch/)",
+            "takeaways": "- Civic tech blocked by procurement systems - Engagement is often the real problem, not apathy - Change must be local and trust-based\n\n\"'People don't care' is false — you're just not engaging them correctly\"",
+            "coords": [-122.4010309, 37.78744183],
+            "images": ["bri06"],
+            "field": "Urban Policy / Civic Tech",
+            "sector": "Non-Profit",
+            "summary": "Policy think tank focused on urban planning, governance, and civic systems in the Bay Area"
+        },
+        {
+            "title": "[CA Forever](https://californiaforever.com/)",
+            "people": "[Anyé Spivey](https://www.linkedin.com/in/any%C3%A9-spivey-78a7565/)",
+            "takeaways": "- Biggest barrier is governance and permissions - Designing from scratch introduces new risks - Metrics like walkability + affordability guide vision\n\nThe biggest challenge to building a city is permission",
+            "coords": [-122.398815, 37.78890101],
+            "images": ["bryan15"],
+            "field": "Urban Development / Speculative Urbanism",
+            "sector": "Private",
+            "summary": "Private initiative to build a new city in California from scratch"
+        },
+        {
+            "title": "[SITELAB](https://www.sitelaburbanstudio.com/)",
+            "people": "[Laura Crescimano](https://www.linkedin.com/in/laura-crescimano-7353024/)",
+            "takeaways": "- Process and narrative are as important as outcome, the work sells itself - Risk mitigation (climate, legal) must be embedded early - Values: Curious, humble, ambitious\n\n\"Don't wait for your business cards to start your business - Instead of thinking about the what first, the why and how dictates who should be included in the conversation and what the 'what' is\"",
+            "coords": [-122.400587, 37.78727344],
+            "images": ["bryan16"],
+            "field": "Urban Strategy / Public Interest Design",
+            "sector": "Private",
+            "summary": "Urban design studio focusing on public-interest projects and process-driven design"
+        }
+    ]
+}
