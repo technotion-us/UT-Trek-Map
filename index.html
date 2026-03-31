@@ -12,7 +12,7 @@ body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%; }
 
 .mapboxgl-popup {
-    max-width: 420px;
+    max-width:720px;
     font-family: system-ui;
 }
 
@@ -217,9 +217,9 @@ function getSectorHaloColorExpression() {
 }
 
 function startPulseAnimation() {
-    const baseRadius = 10;
-    const amplitude = 2;
-    const speed = 0.0035;
+    const baseRadius = 11;
+    const amplitude = 5;
+    const speed = 0.0042;
 
     function animate(timestamp) {
         if (!map.getLayer(STOPS_PULSE_LAYER_ID)) {
@@ -228,7 +228,7 @@ function startPulseAnimation() {
 
         const wave = (Math.sin(timestamp * speed) + 1) / 2;
         const pulseRadius = baseRadius + (wave * amplitude);
-        const pulseOpacity = 0.32 - (wave * 0.2);
+        const pulseOpacity = 0.6 - (wave * 0.35);
 
         map.setPaintProperty(STOPS_PULSE_LAYER_ID, 'circle-radius', [
             'case',
