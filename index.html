@@ -173,71 +173,131 @@ function createCarousel(images = []) {
     `;
 }
 
+const STOPS_SOURCE_ID = 'trek-stops';
+const STOPS_LAYER_ID = 'trek-stops-layer';
+
 function addLocationsToMap(locations) {
-let activeMarkerEl = null;
-
-locations.forEach(loc => {
-
-    const el = document.createElement('div');
-    el.className = 'trek-marker';
-
-    const popupHTML = `
-        <div class="popup-title">${loc.title}</div>
-        <div class="popup-people">${loc.people}</div>
-        <div class="popup-takeaways">${loc.takeaways}</div>
-        ${createCarousel(loc.images || [])}
-    `;
-
-    const popup = new mapboxgl.Popup({ offset: 25 })
-        .setHTML(popupHTML);
-
-    popup.on('open', () => {
-        if (activeMarkerEl && activeMarkerEl !== el) {
-            activeMarkerEl.classList.remove('is-active');
+    const features = locations.map((loc, index) => ({
+        type: 'Feature',
+        id: index,
+        geometry: {
+            type: 'Point',
+            coordinates: [Number(loc.coords[0]), Number(loc.coords[1])]
+        },
+        properties: {
+            title: loc.title || '',
+            people: loc.people || '',
+            takeaways: loc.takeaways || '',
+            images: JSON.stringify(loc.images || [])
         }
+    }));
 
-        el.classList.add('is-active');
-        activeMarkerEl = el;
-    });
-
-    popup.on('close', () => {
-        el.classList.remove('is-active');
-        if (activeMarkerEl === el) {
-            activeMarkerEl = null;
+    map.addSource(STOPS_SOURCE_ID, {
+        type: 'geojson',
+        data: {
+            type: 'FeatureCollection',
+            features
         }
     });
 
-    const marker = new mapboxgl.Marker(el)
-        .setLngLat(loc.coords)
-        .setPopup(popup)
-        .addTo(map);
+    map.addLayer({
+        id: STOPS_LAYER_ID,
+        type: 'circle',
+        source: STOPS_SOURCE_ID,
+        paint: {
+            'circle-radius': [
+                'case',
+                ['boolean', ['feature-state', 'active'], false],
+                9,
+                7
+            ],
+            'circle-color': '#4ade80',
+            'circle-stroke-width': [
+                'case',
+                ['boolean', ['feature-state', 'active'], false],
+                3,
+                2
+            ],
+            'circle-stroke-color': 'rgba(74, 222, 128, 0.45)'
+        }
+    });
 
-    const tooltip = new mapboxgl.Popup({
+    const hoverPopup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false,
         offset: 15
-    }).setText(loc.title);
+    });
+    const detailPopup = new mapboxgl.Popup({ offset: 25 });
+    let activeStopId = null;
 
-    el.addEventListener('mouseenter', () => {
-        tooltip.setLngLat(loc.coords).addTo(map);
+    map.on('mouseenter', STOPS_LAYER_ID, (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        const feature = e.features && e.features[0];
+        if (!feature) {
+            return;
+        }
+
+        hoverPopup
+            .setLngLat(feature.geometry.coordinates)
+            .setText(feature.properties.title || '')
+            .addTo(map);
     });
 
-    el.addEventListener('mouseleave', () => {
-        tooltip.remove();
+    map.on('mouseleave', STOPS_LAYER_ID, () => {
+        map.getCanvas().style.cursor = '';
+        hoverPopup.remove();
     });
 
-    el.addEventListener('click', () => {
-        tooltip.remove();
+    map.on('click', STOPS_LAYER_ID, (e) => {
+        const feature = e.features && e.features[0];
+        if (!feature) {
+            return;
+        }
+
+        hoverPopup.remove();
+
+        if (activeStopId !== null) {
+            map.setFeatureState({ source: STOPS_SOURCE_ID, id: activeStopId }, { active: false });
+        }
+
+        activeStopId = feature.id;
+        map.setFeatureState({ source: STOPS_SOURCE_ID, id: activeStopId }, { active: true });
+
+        let images = [];
+        try {
+            images = JSON.parse(feature.properties.images || '[]');
+        } catch (error) {
+            images = [];
+        }
+
+        const popupHTML = `
+            <div class="popup-title">${feature.properties.title}</div>
+            <div class="popup-people">${feature.properties.people}</div>
+            <div class="popup-takeaways">${feature.properties.takeaways}</div>
+            ${createCarousel(images)}
+        `;
+
+        detailPopup
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(popupHTML)
+            .addTo(map);
     });
 
-});
+    detailPopup.on('close', () => {
+        if (activeStopId !== null) {
+            map.setFeatureState({ source: STOPS_SOURCE_ID, id: activeStopId }, { active: false });
+            activeStopId = null;
+        }
+    });
 }
 
-loadLocations()
-    .then(addLocationsToMap)
-    .catch((error) => {
-        console.error('Unable to load stops for map markers:', error);
-    });
+map.on('load', () => {
+    loadLocations()
+        .then(addLocationsToMap)
+        .catch((error) => {
+            console.error('Unable to load stops for map markers:', error);
+        });
+});
 
 function nextImage(btn) {
     const imgs = btn.parentElement.previousElementSibling.querySelectorAll("img");
