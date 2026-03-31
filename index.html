@@ -12,7 +12,7 @@ body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%; }
 
 .mapboxgl-popup {
-    max-width: 320px;
+    max-width: 420px;
     font-family: system-ui;
 }
 
@@ -24,11 +24,22 @@ body { margin:0; padding:0; }
 
 .popup-people {
     font-style: italic;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.popup-field {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.popup-summary {
+    font-size: 13px;
     margin-bottom: 6px;
 }
 
 .popup-takeaways {
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 8px;
 }
 
@@ -181,6 +192,62 @@ function stripHtml(value = '') {
 
 const STOPS_SOURCE_ID = 'trek-stops';
 const STOPS_LAYER_ID = 'trek-stops-layer';
+const STOPS_PULSE_LAYER_ID = 'trek-stops-pulse-layer';
+
+function getSectorColorExpression() {
+    return [
+        'match',
+        ['get', 'sector'],
+        'private', '#ff4fa3',
+        'public', '#3b82f6',
+        'non-profit', '#a855f7',
+        '#4ade80'
+    ];
+}
+
+function getSectorHaloColorExpression() {
+    return [
+        'match',
+        ['get', 'sector'],
+        'private', 'rgba(255, 79, 163, 0.45)',
+        'public', 'rgba(59, 130, 246, 0.45)',
+        'non-profit', 'rgba(168, 85, 247, 0.45)',
+        'rgba(74, 222, 128, 0.45)'
+    ];
+}
+
+function startPulseAnimation() {
+    const baseRadius = 10;
+    const amplitude = 2;
+    const speed = 0.0035;
+
+    function animate(timestamp) {
+        if (!map.getLayer(STOPS_PULSE_LAYER_ID)) {
+            return;
+        }
+
+        const wave = (Math.sin(timestamp * speed) + 1) / 2;
+        const pulseRadius = baseRadius + (wave * amplitude);
+        const pulseOpacity = 0.32 - (wave * 0.2);
+
+        map.setPaintProperty(STOPS_PULSE_LAYER_ID, 'circle-radius', [
+            'case',
+            ['boolean', ['feature-state', 'active'], false],
+            pulseRadius,
+            0
+        ]);
+        map.setPaintProperty(STOPS_PULSE_LAYER_ID, 'circle-opacity', [
+            'case',
+            ['boolean', ['feature-state', 'active'], false],
+            pulseOpacity,
+            0
+        ]);
+
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+}
 
 function addLocationsToMap(locations) {
     const features = locations.map((loc, index) => ({
@@ -193,6 +260,8 @@ function addLocationsToMap(locations) {
         properties: {
             title: loc.title || '',
             people: loc.people || '',
+            field: loc.field || '',
+            summary: loc.summary || '',
             takeaways: loc.takeaways || '',
             images: JSON.stringify(loc.images || []),
             sector: (loc.sector || '').trim().toLowerCase()
@@ -218,23 +287,29 @@ function addLocationsToMap(locations) {
                 9,
                 7
             ],
-            'circle-color': [
-                'match',
-                ['get', 'sector'],
-                'private', '#ff4fa3',
-                'public', '#3b82f6',
-                'non-profit', '#a855f7',
-                '#4ade80'
-            ],
+            'circle-color': getSectorColorExpression(),
             'circle-stroke-width': [
                 'case',
                 ['boolean', ['feature-state', 'active'], false],
                 3,
                 2
             ],
-            'circle-stroke-color': 'rgba(74, 222, 128, 0.45)'
+            'circle-stroke-color': getSectorHaloColorExpression()
         }
     });
+
+    map.addLayer({
+        id: STOPS_PULSE_LAYER_ID,
+        type: 'circle',
+        source: STOPS_SOURCE_ID,
+        paint: {
+            'circle-color': getSectorColorExpression(),
+            'circle-radius': 0,
+            'circle-opacity': 0
+        }
+    });
+
+    startPulseAnimation();
 
     const hoverPopup = new mapboxgl.Popup({
         closeButton: false,
@@ -287,6 +362,8 @@ function addLocationsToMap(locations) {
         const popupHTML = `
             <div class="popup-title">${feature.properties.title}</div>
             <div class="popup-people">${feature.properties.people}</div>
+            <div class="popup-field">${feature.properties.field}</div>
+            <div class="popup-summary">${feature.properties.summary}</div>
             <div class="popup-takeaways">${feature.properties.takeaways}</div>
             ${createCarousel(images)}
         `;
