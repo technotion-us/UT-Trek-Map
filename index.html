@@ -194,7 +194,8 @@ function addLocationsToMap(locations) {
             title: loc.title || '',
             people: loc.people || '',
             takeaways: loc.takeaways || '',
-            images: JSON.stringify(loc.images || [])
+            images: JSON.stringify(loc.images || []),
+            sector: (loc.sector || '').trim().toLowerCase()
         }
     }));
 
@@ -217,7 +218,14 @@ function addLocationsToMap(locations) {
                 9,
                 7
             ],
-            'circle-color': '#4ade80',
+            'circle-color': [
+                'match',
+                ['get', 'sector'],
+                'private', '#ff4fa3',
+                'public', '#3b82f6',
+                'non-profit', '#a855f7',
+                '#4ade80'
+            ],
             'circle-stroke-width': [
                 'case',
                 ['boolean', ['feature-state', 'active'], false],
