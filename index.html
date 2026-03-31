@@ -165,12 +165,16 @@ async function loadLocations() {
 }
 
 function createCarousel(images = []) {
-    if (!images.length) {
+    const resolvedImages = images
+        .map((img) => resolveImagePath(img))
+        .filter((img) => Boolean(img));
+
+    if (!resolvedImages.length) {
         return "";
     }
 
-    let imgHTML = images.map((img, i) =>
-        `<img src="${img}" class="${i===0?'active':''}">`
+    let imgHTML = resolvedImages.map((img, i) =>
+        `<img src="${img}" class="${i===0?'active':''}" loading="lazy" onerror="this.remove()">`
     ).join("");
 
     return `
@@ -182,6 +186,88 @@ function createCarousel(images = []) {
             <button onclick="nextImage(this)">▶</button>
         </div>
     `;
+}
+
+const SHAREOUT_IMAGE_FILES = [
+    'bri01.JPG',
+    'bri02.JPG',
+    'bri03.JPG',
+    'bri04.JPG',
+    'bri05.JPG',
+    'bri06.JPG',
+    'bryan01.jpg',
+    'bryan02.jpg',
+    'bryan03.jpg',
+    'bryan04.jpg',
+    'bryan05.jpg',
+    'bryan06.jpg',
+    'bryan07.jpg',
+    'bryan08.jpg',
+    'bryan09.jpg',
+    'bryan10.jpg',
+    'bryan11.jpg',
+    'bryan12.jpg',
+    'bryan13.jpg',
+    'bryan14.jpg',
+    'bryan15.jpg',
+    'bryan16.jpg',
+    'bryan17.jpg',
+    'charlie01.jpg',
+    'jack00_COVER.jpg',
+    'jack01.jpg',
+    'jack03.jpg',
+    'jack04.jpg',
+    'jack05.jpg'
+];
+
+const SHAREOUT_IMAGE_LOOKUP = SHAREOUT_IMAGE_FILES.reduce((lookup, fileName) => {
+    lookup[fileName.toLowerCase()] = fileName;
+    return lookup;
+}, {});
+
+function resolveImagePath(imageKey) {
+    if (!imageKey || typeof imageKey !== 'string') {
+        return null;
+    }
+
+    const cleanKey = imageKey.trim();
+    if (!cleanKey) {
+        return null;
+    }
+
+    if (/^https?:\/\//i.test(cleanKey)) {
+        return cleanKey;
+    }
+
+    const baseName = cleanKey.split('/').pop();
+    if (!baseName) {
+        return null;
+    }
+
+    const candidates = [
+        baseName,
+        `${baseName}.jpg`,
+        `${baseName}.jpeg`,
+        `${baseName}.png`,
+        `${baseName}.webp`,
+        `${baseName}.gif`
+    ];
+
+    let matchedFile = null;
+    for (const candidate of candidates) {
+        const file = SHAREOUT_IMAGE_LOOKUP[candidate.toLowerCase()];
+        if (file) {
+            matchedFile = file;
+            break;
+        }
+    }
+
+    if (!matchedFile) {
+        console.warn('Image key from testing.json did not match a file in Shareout Pics:', imageKey);
+        return null;
+    }
+
+    return `Shareout Pics/${encodeURIComponent(matchedFile)}`;
 }
 
 function stripHtml(value = '') {
@@ -464,7 +550,15 @@ map.on('load', () => {
 
 function nextImage(btn) {
     const imgs = btn.parentElement.previousElementSibling.querySelectorAll("img");
+    if (imgs.length < 2) {
+        return;
+    }
+
     let activeIndex = [...imgs].findIndex(i => i.classList.contains("active"));
+    if (activeIndex === -1) {
+        activeIndex = 0;
+        imgs[0].classList.add("active");
+    }
 
     imgs[activeIndex].classList.remove("active");
     imgs[(activeIndex + 1) % imgs.length].classList.add("active");
@@ -472,7 +566,15 @@ function nextImage(btn) {
 
 function prevImage(btn) {
     const imgs = btn.parentElement.previousElementSibling.querySelectorAll("img");
+    if (imgs.length < 2) {
+        return;
+    }
+
     let activeIndex = [...imgs].findIndex(i => i.classList.contains("active"));
+    if (activeIndex === -1) {
+        activeIndex = 0;
+        imgs[0].classList.add("active");
+    }
 
     imgs[activeIndex].classList.remove("active");
     imgs[(activeIndex - 1 + imgs.length) % imgs.length].classList.add("active");
