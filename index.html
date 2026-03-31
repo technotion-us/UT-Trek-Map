@@ -190,6 +190,76 @@ function stripHtml(value = '') {
     return temp.textContent || temp.innerText || '';
 }
 
+function distanceMeters(coordsA, coordsB) {
+    const [lon1, lat1] = coordsA;
+    const [lon2, lat2] = coordsB;
+    const toRad = Math.PI / 180;
+    const dLat = (lat2 - lat1) * toRad;
+    const dLon = (lon2 - lon1) * toRad;
+    const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return 6371000 * c;
+}
+
+function offsetCoordsByMeters(coords, eastMeters, northMeters) {
+    const [lon, lat] = coords;
+    const latRadians = lat * (Math.PI / 180);
+    const dLat = northMeters / 111320;
+    const dLon = eastMeters / (111320 * Math.max(Math.cos(latRadians), 0.00001));
+    return [lon + dLon, lat + dLat];
+}
+
+function spreadOverlappingLocations(locations) {
+    const overlapThresholdMeters = 90;
+    const spreadRadiusMeters = 35;
+
+    const enhanced = locations.map((loc) => ({
+        ...loc,
+        displayCoords: [Number(loc.coords[0]), Number(loc.coords[1])]
+    }));
+
+    const visited = new Set();
+
+    for (let i = 0; i < enhanced.length; i += 1) {
+        if (visited.has(i)) {
+            continue;
+        }
+
+        const queue = [i];
+        const group = [];
+        visited.add(i);
+
+        while (queue.length) {
+            const current = queue.shift();
+            group.push(current);
+
+            for (let j = 0; j < enhanced.length; j += 1) {
+                if (visited.has(j)) {
+                    continue;
+                }
+
+                if (distanceMeters(enhanced[current].coords, enhanced[j].coords) <= overlapThresholdMeters) {
+                    visited.add(j);
+                    queue.push(j);
+                }
+            }
+        }
+
+        if (group.length > 1) {
+            group.forEach((index, position) => {
+                const angle = (2 * Math.PI * position) / group.length;
+                const east = Math.cos(angle) * spreadRadiusMeters;
+                const north = Math.sin(angle) * spreadRadiusMeters;
+                enhanced[index].displayCoords = offsetCoordsByMeters(enhanced[index].coords, east, north);
+            });
+        }
+    }
+
+    return enhanced;
+}
+
 const STOPS_SOURCE_ID = 'trek-stops';
 const STOPS_LAYER_ID = 'trek-stops-layer';
 const STOPS_PULSE_LAYER_ID = 'trek-stops-pulse-layer';
@@ -250,12 +320,14 @@ function startPulseAnimation() {
 }
 
 function addLocationsToMap(locations) {
-    const features = locations.map((loc, index) => ({
+    const preparedLocations = spreadOverlappingLocations(locations);
+
+    const features = preparedLocations.map((loc, index) => ({
         type: 'Feature',
         id: index,
         geometry: {
             type: 'Point',
-            coordinates: [Number(loc.coords[0]), Number(loc.coords[1])]
+            coordinates: [Number(loc.displayCoords[0]), Number(loc.displayCoords[1])]
         },
         properties: {
             title: loc.title || '',
